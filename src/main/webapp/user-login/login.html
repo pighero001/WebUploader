@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Login</title>
+	<!-- loading.css -->
+	<link rel="stylesheet" type="text/css" href="/loading/css/dialog.css">
+	<link rel="shortcut icon" href="http://fex.baidu.com/webuploader/images/favicon.ico">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript" src="/user-login/js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="/user-login/images/login.js"></script>
+	<link rel="stylesheet" type="text/css" href="/user-login/css/login2.css"  />
+	<!-- loading.js -->
+	<script src="/loading/js/zepto.min.js"></script>
+	<script type="text/javascript" src="/loading/js/dialog.min.js"></script>
+</head>
+<body>
+	<h1>
+		Login<sup>V2017</sup>
+	</h1>
+
+	<div class="login" style="margin-top: 50px;">
+
+
+		<div class="web_qr_login" id="web_qr_login"
+			style="display: block; height: 235px;">
+
+			<!--登录-->
+			<div class="web_login" id="web_login">
+
+
+				<div class="login-box">
+
+
+					<div class="login_form">
+						
+					<div class="loginForm">
+							<input type="hidden" name="did" value="0" /> <input type="hidden"
+								name="to" value="log" />
+							<div class="uinArea" id="uinArea">
+								<label class="input-tips" for="u">帐号：</label>
+								<div class="inputOuter" id="uArea">
+
+									<input type="text" id="u" name="username" class="inputstyle" onkeyup="this.value=this.value.replace(/[^\w]/g,'');"/>
+								</div>
+							</div>
+							<div class="pwdArea" id="pwdArea">
+								<label class="input-tips" for="p">密码：</label>
+								<div class="inputOuter" id="pArea">
+
+									<input type="password" id="p" name="p" class="inputstyle" onkeyup="this.value=this.value.replace(/[^\w]/g,'');"/>
+								</div>
+							</div>
+						<span class="Error_Prompt" style="color: red"></span>
+							<div style="padding-left: 50px; margin-top: 20px;">
+								<input type="button" value="登 录" style="width: 150px;"
+									class="button_blue" />
+							</div>
+					</div></div>
+
+				</div>
+			</div>
+			<!--登录end-->
+		</div>
+
+
+	</div>
+	<div class="jianyi">*推荐使用ie8或以上版本ie浏览器或Chrome内核浏览器访问本站</div>
+	<script type="text/javascript" src="/user-login/js/login.js"></script>
+	<script>
+        /* 点击登陆 */
+        $(".button_blue").click(function () {
+            user_login($("input[name=username]").val(),$("input[name=p]").val());
+        });
+        /* 监听回车 */
+        $("input[name=p]").keypress(function (e) {
+            var eCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+            if (eCode == 13) {
+                user_login($("input[name=username]").val(),$("input[name=p]").val());
+            }
+        });
+
+	</script>
+</body>
+</html>

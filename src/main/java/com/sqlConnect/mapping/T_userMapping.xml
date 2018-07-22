@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sqlConnect.mapping.T_userMapping">
+
+
+    <!-- 判断用户名是否存在-->
+    <select id="UserName_IsEmpty" resultType="java.lang.String">
+		select user_name from t_user where user_name=#{_parameter}
+	</select>
+
+    <!-- 判断用户密码,执行登陆 -->
+    <select id="Userlogin" resultType="com.entity.T_user">
+		select user_name,user_password from t_user where user_name=#{User_name} and user_password=#{User_password}
+	</select>
+
+	<!-- 添加用户信息-->
+	<insert id="Create_Account" parameterType="com.entity.T_user" flushCache="true">
+		insert into
+		t_user(user_name,user_password)
+		values
+			(
+			#{User_name},
+			#{User_password}
+			)
+	</insert>
+
+</mapper>

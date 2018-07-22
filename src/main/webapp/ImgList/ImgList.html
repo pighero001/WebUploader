@@ -1,0 +1,192 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>图片管理</title>
+    <link rel="stylesheet" href="http://libs.baidu.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/ImgList/css/jq22-demo.css">
+    <link rel="stylesheet" href="/ImgList/css/default.min.css">
+    <link rel="stylesheet" href="/ImgList/css/demo.min.css">
+    <link rel="stylesheet" type="text/css" href="/ImgList/css/jquery-confirm.css" />
+
+    <!-- loading.css -->
+    <link rel="stylesheet" type="text/css" href="/loading/css/dialog.css">
+    <link rel="stylesheet" type="text/css" href="/ImgList/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/ImgList/css/swfupload.css">
+    <link rel="shortcut icon" href="http://fex.baidu.com/webuploader/images/favicon.ico">
+
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="/ImgList/js/jquery.sticky.min.js"></script>
+    <script src="/ImgList/js/pretty.js"></script>
+    <script type="text/javascript" src="/ImgList/js/jquery-confirm.js"></script>
+    <!-- loading.js -->
+    <script type="text/javascript" src="/loading/js/zepto.min.js"></script>
+    <script type="text/javascript" src="/loading/js/dialog.min.js"></script>
+    <!-- layUI.js -->
+    <script type="text/javascript" src="/ImgList/js/layui.js"></script>
+    <script type="text/javascript">
+        $.getScript("/user-login/token/token.js", function () {
+            VerificationToken();
+        });
+    </script>
+    <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+</head>
+<body leftmargin="8" topmargin="8" background="/ImgList/images/allbg.gif">
+<style>
+    input, select, textarea {
+        outline: inherit;
+        border: none;
+        background: #fff;
+    }
+
+    .zyc button {
+        width: 100px;
+        height: 30px;
+        background: #6dbfff;
+        border-radius: 20px;
+        text-align: center;
+        line-height: 30px;
+        border: none;
+    }
+
+    .zyc input {
+        width: 220px;
+        height: 20px
+    }
+
+    .zyc {
+        width: 300px;
+        height: 170px;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        position: absolute;
+        z-index: 1;
+        display: none;
+        left: 10px;
+        border-radius: 5px
+    }
+
+    .wwd div {
+        float: left;
+    }
+
+    .wwd div a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<div class="wwd" style="height: 50px; color: white;">
+    <div style="width: 100px; height: 40px;line-height: 40px;text-align: center;color: white;background: #8e9eba;margin-left: 10px">
+        <a href="/Jump/Uploader">上传</a>
+    </div>
+    <div style="width: 100px; height: 40px;line-height: 40px;text-align: center;color: white;background: #8e9eba;margin-left: 10px">
+        <a href="/Jump/List">图集</a>
+    </div>
+    <div style="width: 100px; height: 40px;line-height: 40px;text-align: center;color: white;background: #8e9eba;margin-left: 10px">
+        <a href="javascript:void(0)" onclick="delImgList()">删除选中图集</a>
+    </div>
+    <div class="xs"
+         style="width: 100px; height: 40px;line-height: 40px;text-align: center;color: white;background: #8e9eba;margin-left: 10px">
+        <b>点击添加账号</b>
+    </div>
+</div>
+<div class="ImgInfo"></div>
+<div class="zyc" style="color: white">
+    <br>
+    用户名：<input type="text" name="name" onkeyup="this.value=this.value.replace(/[^\w]/g,'');">
+    <br><br>
+    密 &nbsp;码：<input type="password" name="password" onkeyup="this.value=this.value.replace(/[^\w]/g,'');">
+    <br><br>
+    <button class="Preservation" style=" ">完成</button>
+</div>
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#cfcfcf" align="center" style="margin-top:8px;">
+    <tbody>
+    <tr bgcolor="#FBFCE2" height="25" align="center">
+        <td width="13%">文档图片</td>
+        <td width="35%">标题</td>
+        <td width="12%">标签</td>
+        <td width="10%">发布者</td>
+    </tr>
+    </tbody>
+</table>
+<div class="list"></div>
+
+
+
+
+<table width="98%" border="0" cellspacing="1" cellpadding="1" bgcolor="#cfcfcf" align="center" style="margin-top:8px;">
+    <tbody>
+    <tr>
+        <td height="28" align="center" bgcolor="#F9FCEF">
+            <div class="pagelistbox" id="pagelistbox"></div>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<input type="hidden" name="dopost" value="listArchives">
+<table width="98%" border="0" cellpadding="1" cellspacing="1" bgcolor="#cfcfcf" align="center" style="margin-top:8px">
+    <tbody>
+    <tr>
+        <td background="/ImgList/images/wbg.gif" align="center">
+            <table border="0" cellpadding="0" cellspacing="0" height="32">
+                <tbody>
+                <tr>
+
+                    <td width="160">
+
+                    </td>
+                    <td width="70" background="/ImgList/images/wbg.gif">
+                        关键字：
+                    </td>
+                    <td width="160">
+                        <input type="text" name="keyword" value="" style="width:150px;height:20px;">
+                    </td>
+
+                    <td>
+                        <input name="imageField" type="image" src="/ImgList/images/button_search.gif" width="60"
+                               height="22" border="0" class="np">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    // 注册一个用户
+    $(".Preservation").click(function () {
+        /* 加载loading */
+        $("body").append('<div class="loading"><div class="mask"></div>' +
+            '<div id="animationTipBox" style="width: 180px; height: 150px; margin-left: -90px; margin-top: -75px;"><div class="load"><div class="icon_box"><div class="cirBox1"><div class="cir1"></div><div class="cir2"></div><div class="cir3"></div><div class="cir4"></div></div><div class="cirBox2"><div class="cir1"></div><div class="cir2"></div><div class="cir3"></div><div class="cir4"></div></div><div class="cirBox3"><div class="cir1"></div><div class="cir2"></div><div class="cir3"></div><div class="cir4"></div></div></div></div><div class="dec_txt">加载中...</div></div></div>');
+        if ($("input[name=name]").val() != "" && $("input[name=password]").val() != "") {
+            $.post("/register/Creating_User", {
+                user_name: $("input[name=name]").val(),
+                user_password: $("input[name=password]").val()
+            }, function (result) {
+                $(".loading").remove();
+                $.each(result, function (i, resultInfo) {
+                    if (resultInfo.errMsg == "OK") {
+                        popup({type: "success", msg: "添加成功", delay: 3000});
+                    } else {
+                        popup({type: 'error', msg: resultInfo.errMsg, delay: 3000, bg: true, height: 180});
+                    }
+                });
+            });
+        } else {
+            $(".loading").remove();
+            popup({type: 'error', msg: "用户名和密码不能为空", delay: 3000, bg: true});
+        }
+    })
+</script>
+<script>
+    $(".xs").click(function () {
+        $(".zyc").slideToggle();
+    });
+</script>
+<script type="text/javascript" src="/ImgList/js/ImgList.js"></script>
+</body>
+</html>

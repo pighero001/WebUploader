@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<input type="text" name="emoji">
+<button class="button">点击</button>
+<script>
+    $(".button").click(function () {
+
+        // 转字符串
+        $.post("/emoji/emojiConverterToAlias",{
+            str:$("input[name=emoji]").val()
+        },function (e) {
+            alert("e:"+e)
+        })
+        // alert($("input[name=emoji]").val());
+
+    })
+
+</script>
+</body>
+</html>

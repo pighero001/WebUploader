@@ -1,0 +1,65 @@
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="2" id="adset" style="border: 1px solid rgb(207, 207, 207); background: rgb(255, 255, 255); display: table;">
+    <tbody>
+    <tr>
+        <td height="24" bgcolor="#F9FCEF" class="bline2">&nbsp;<b>原有图片：</b></td>
+    </tr>
+    <tr>
+        <td height="24" colspan="4" class="bline">
+            <table width="100%">
+                <tbody>
+                <tr>
+                    <td>
+                        <div id="thumbnailsdit">
+                            <div class="albCt albEdit" id="albold1">
+                                <img src="swfupload.php?dopost=ddimg&amp;img=/uploads/allimg/180710/3-1PG01JI0.jpg" width="120">
+                            </div>
+                            <div class="albCt albEdit" id="albold2">
+                                <img src="swfupload.php?dopost=ddimg&amp;img=/uploads/allimg/180710/3-1PG01JI1.jpg" width="120">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td height="24" bgcolor="#F9FCEF" class="bline2">&nbsp;<b>图片地址：</b></td>
+    </tr>
+    <tr>
+        <td height="24" colspan="4" class="bline">
+            <table width="100%">
+                <tbody>
+                <tr>
+                    <td>
+                        <div id="thumbnailsEdit">
+                            <li>/uploads/allimg/180710/3-1PG01JI7-51.jpg</li>
+                            <li>/uploads/allimg/180710/3-1PG01JI8.jpg</li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="thumbnailsEdits">
+							<textarea cols="65" rows="6" id="biao1">
+								http://img.wwk.cn/uploads/allimg/180710/3-1PG01JI7-50.jpg
+								http://img.wwk.cn/uploads/allimg/180710/3-1PG01JI7-51.jpg
+								http://img.wwk.cn/uploads/allimg/180710/3-1PG01JI8.jpg
+							</textarea>
+                            <input type="button" onclick="copyUrl2()" value="点击复制代码"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    function copyUrl2() {
+        var Url2 = document.getElementById("biao1");
+        Url2.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        alert("已复制好，可贴粘。");
+    }
+</script>

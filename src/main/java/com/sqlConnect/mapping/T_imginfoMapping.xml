@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sqlConnect.mapping.T_imginfoMapping">
+
+    <!-- 自定义查询图片信息 -->
+    <select id="Custom_query" resultType="com.entity.T_imginfo">
+		select img_id,img_address,img_list from t_imginfo where ${_parameter}
+	</select>
+
+    <!-- 根据图片集ID查询图片 -->
+    <select id="According_toImgListID_Inquire" resultType="com.entity.T_imginfo">
+		select img_id,img_address,img_list from t_imginfo where img_list = #{_parameter}
+	</select>
+
+    <!-- 查询图片集封面 -->
+    <select id="Picture_Cover" resultType="com.entity.T_imginfo">
+		select img_id,img_address,img_list from (select img_id,img_address,img_list from t_imginfo group by img_list)as base group by img_list ${_parameter}
+	</select>
+
+    <!-- 查询图片集封面(根据图片集ID) -->
+    <select id="According_toImgListID_InquirePicture_Cover" resultType="com.entity.T_imginfo">
+		select img_id,img_address,img_list from (select img_id,img_address,img_list from t_imginfo group by img_list)as base where img_list = #{_parameter}  group by img_list
+	</select>
+
+    <!-- 保存图片信息 -->
+    <insert id="Save_Pictureinfo" parameterType="java.util.List" flushCache="true">
+        insert into
+        t_imginfo(Img_address,Img_list)
+        values
+        <foreach collection ="list" item="reddemCode" index= "index" separator =",">
+            (
+            #{reddemCode.Img_address},
+            #{reddemCode.Img_list}
+            )
+        </foreach >
+    </insert>
+
+</mapper>
